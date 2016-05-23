@@ -1,0 +1,1 @@
+call ..\..\venv\django15\Scripts\activate.bat

@@ -1,0 +1,14 @@
+django-reversion
+django
+django-jquery-ui
+django-mptt
+django-oauth2-provider
+# Optional requirements
+ipython[notebook]
+#towel_bootstrap
+jinja2
+jsonschema
+#pyparsing==1.5.7
+#pydot
+django-tastypie
+django-compat

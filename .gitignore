@@ -1,0 +1,15 @@
+/.idea
+*.pyc
+*.db
+/data
+/static
+/config.yaml
+/index.wsgi
+/external_apps
+/local
+/.ipynb_checkpoints
+/external_app_repos/*
+/logs
+/mailbox_attachments
+/others
+/obs

@@ -1,0 +1,33 @@
+[submodule "external_git/libtool"]
+	path = external_git/libtool
+	url = https://github.com/weijia/libtool.git
+[submodule "external_git/djangoautoconf"]
+	path = external_git/djangoautoconf
+	url = https://github.com/weijia/djangoautoconf.git
+[submodule "external_git/django-admin-bootstrapped"]
+	path = external_git/django-admin-bootstrapped
+	url = https://github.com/django-admin-bootstrapped/django-admin-bootstrapped.git
+[submodule "external_git/django-treenav"]
+	path = external_git/django-treenav
+	url = https://github.com/weijia/django-treenav.git
+[submodule "external_git/django-background-task"]
+	path = external_git/django-background-task
+	url = https://github.com/lilspikey/django-background-task.git
+[submodule "external_git/django_cron"]
+	path = external_git/django_cron
+	url = https://github.com/weijia/django_cron.git
+[submodule "external_git/webmanager"]
+	path = external_git/webmanager
+	url = https://github.com/weijia/webmanager.git
+[submodule "server_base_packages/djangoautoconf"]
+	path = server_base_packages/djangoautoconf
+	url = https://github.com/weijia/djangoautoconf.git
+[submodule "server_base_packages/libtool"]
+	path = server_base_packages/libtool
+	url = https://github.com/weijia/libtool.git
+[submodule "server_base_packages/webmanager"]
+	path = server_base_packages/webmanager
+	url = https://github.com/weijia/webmanager.git
+[submodule "server_base_packages/django-simplemenu"]
+	path = server_base_packages/django-simplemenu
+	url = https://github.com/weijia/django-simplemenu.git
