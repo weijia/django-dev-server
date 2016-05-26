@@ -12,3 +12,5 @@ jsonschema
 #pydot
 django-tastypie
 django-compat
+ufs-tools
+djangoautoconf

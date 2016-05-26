@@ -1,0 +1,27 @@
+import logging
+
+from iconizer.django_in_iconizer.django_starter import DjangoStarter
+
+log = logging.getLogger(__name__)
+
+
+class UfsBasicStarter(DjangoStarter):
+
+    def get_background_tasks(self):
+        return (
+            # self.django_server.get_task_descriptor("drop_tagger"),
+            # {"background_tasks": ["manage_with_conf.py", "process_tasks"]},
+            # {"ipynb": ["manage.py", "shell_ipynb"]},
+            # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]},
+            # {"clipboard_monitor": ["manage.py", "clipboard_monitor_task"]},
+            # {"web_server": ["cherrypy_server.py", ]}),
+            # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]})
+        )
+
+    def get_frontend_task_descriptor(self):
+        return self.django_server.get_task_descriptor("runserver", ["0.0.0.0:8110"])
+
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
+    UfsBasicStarter().start_iconized_applications()
