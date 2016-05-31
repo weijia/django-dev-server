@@ -9,6 +9,7 @@ class UfsBasicStarter(DjangoStarter):
 
     def get_background_tasks(self):
         return (
+            self.django_server.get_task_descriptor("git_pull_all"),
             # self.django_server.get_task_descriptor("drop_tagger"),
             # {"background_tasks": ["manage_with_conf.py", "process_tasks"]},
             # {"ipynb": ["manage.py", "shell_ipynb"]},

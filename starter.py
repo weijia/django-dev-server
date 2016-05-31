@@ -1,10 +1,11 @@
 import logging
 import os
+
+from iconizer.django_in_iconizer.django_starter import DjangoStarter
 from ufs_tools.libtool import include_all
 
 include_all(__file__, "server_base_packages")
 
-from iconizer.django_in_iconizer.django_in_iconizer import DjangoInIconizer
 from iconizer.django_in_iconizer.postgresql_checker import PostgreSqlChecker
 from iconizer.iconizer_app_root import IconizerAppRoot
 
@@ -17,11 +18,10 @@ os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
 os.environ["UFS_DATABASE"] = "sqlite"
 
 
-class UfsStarter(IconizerAppRoot):
+class UfsStarter(DjangoStarter):
     # noinspection PyAttributeOutsideInit
     def init_parameters(self):
         super(UfsStarter, self).init_parameters()
-        django_server = DjangoInIconizer()
         self.front_end_task = {"postgre_sql": ["scripts\\postgresql.bat"]}
         self.background_tasks = (
                                  # {"web_server": ["manage_with_conf.py", "runserver", "8110"]},
