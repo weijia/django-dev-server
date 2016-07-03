@@ -42,7 +42,7 @@ class DjangoCxFreezeBuildSpecGenerator(object):
             self.update_config_spec_for_django_app(installed_app)
 
         self.extend_includes(DEFAULT_DJANGO_MODULES)
-        self.extend_includes(ModuleDescriptor().get_module_list(django))
+        # self.extend_includes(ModuleDescriptor().get_module_list(django))
         # print existing_config['includes']
         self.add_modules_from_class_name_list(self.get_class_names_included_in_settings(settings))
         # print existing_config['includes'], '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1'
@@ -65,10 +65,10 @@ class DjangoCxFreezeBuildSpecGenerator(object):
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("iconizer"))
         self.existing_config['include_files'].append("static")
-
-        # Need this for locale
-        locale_folder = get_folder(django_locale.__file__)
-        self.existing_config['include_files'].append((locale_folder, "django/conf/locale"))
+        #
+        # # Need this for locale
+        # locale_folder = get_folder(django_locale.__file__)
+        # self.existing_config['include_files'].append((locale_folder, "django/conf/locale"))
 
     @staticmethod
     def get_class_names_included_in_settings(settings):
