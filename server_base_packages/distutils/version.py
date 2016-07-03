@@ -1,5 +1,5 @@
 
 
 class StrictVersion(object):
-    def __init__(self, ver)
+    def __init__(self, ver):
         pass
