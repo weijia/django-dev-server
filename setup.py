@@ -18,7 +18,7 @@ except:
     pass
 
 from django_build.app_freeze_config import gen_executable_list, get_pytz_files, \
-    get_iconizer_resources
+    get_iconizer_resources, create_executable_from_app_name
 
 include_all(__file__, "server_base_packages")
 
@@ -63,7 +63,7 @@ includes = [
 ]
 
 app_list = [
-    'starter',
+    # 'starter',
     'manage',
     'cherrypy_server',
 ]
@@ -126,6 +126,7 @@ os.environ["TK_LIBRARY"] = os.path.join(python_dir, tk_lib_path_name)
 DjangoCxFreezeBuildSpecGenerator().gen_spec(settings, build_exe_params)
 
 final_script_list = gen_executable_list(app_list)
+final_script_list.append(create_executable_from_app_name("starter", base="Win32GUI"))
 pprint.pprint(build_exe_params)
 setup(
     version="0.1",  # This is required or build process will have exception.
