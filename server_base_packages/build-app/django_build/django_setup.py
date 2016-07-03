@@ -14,6 +14,7 @@ import django.conf.locale as django_locale
 class DjangoCxFreezeBuildSpecGenerator(object):
     def __init__(self):
         self.existing_config = None
+        self.included_module = []
 
     def add_module_to_includes(self, module_full_name):
         if type(module_full_name) == list:
@@ -49,13 +50,25 @@ class DjangoCxFreezeBuildSpecGenerator(object):
         self.extend_includes(settings.INSTALLED_APPS)
         for app in settings.INSTALLED_APPS:
             self.extend_includes(ModuleDescriptor().get_module_list_from_name(app))
+            app_root_name = app
+            if "." in app:
+                app_root_name = app.split(".")[0]
+            if app_root_name not in self.included_module:
+                try:
+                    app_module = __import__(app_root_name, fromlist="dummy")
+                    # target_path = "/".join(app.split("."))
+                    self.existing_config['include_files'].append((app_module.__path__[0], app_root_name))
+                    self.included_module.append(app_module)
+                except:
+                    pass
 
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("iconizer"))
         self.existing_config['include_files'].append("static")
 
-        # locale_folder = get_folder(django_locale.__file__)
-        # self.existing_config['include_files'].append((locale_folder, "django/conf/locale"))
+        # Need this for locale
+        locale_folder = get_folder(django_locale.__file__)
+        self.existing_config['include_files'].append((locale_folder, "django/conf/locale"))
 
     @staticmethod
     def get_class_names_included_in_settings(settings):

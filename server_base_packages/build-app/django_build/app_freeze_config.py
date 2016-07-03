@@ -14,7 +14,7 @@ def create_executable_from_app_name(app_param):
         if app_path is None:
             return None
             # print "app:", app_path
-        return Executable(script=app_path)
+        return Executable(script=app_path, compress=False)
     else:
         app_full_name = app_param[0] + ".py"
         app_path = filetools.find_filename_in_app_framework_with_pattern(app_full_name)

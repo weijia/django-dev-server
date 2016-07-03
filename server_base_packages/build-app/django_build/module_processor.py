@@ -32,12 +32,12 @@ class ModuleDescriptor(object):
 
 
 if __name__ == '__main__':
-    from pkg_resources import resource_listdir
-    import django.conf.locale as django_locale
-    # Itemize data files under proj/resources/images:
-    print django_locale.__file__
-    print resource_listdir('django.conf.locale', '')
-    # Get the data file bytes:
+    # from pkg_resources import resource_listdir
+    # import django.conf.locale as django_locale
+    # # Itemize data files under proj/resources/images:
+    # print django_locale.__file__
+    # print resource_listdir('django.conf.locale', '')
+    # # Get the data file bytes:
     # print resource_string('proj.resources.images', 'pic2.png').encode('base64')
-    # for m in ModuleDescriptor().get_module_list(django):
-    #     print m
+    for m in ModuleDescriptor().get_module_list(django):
+        print m
