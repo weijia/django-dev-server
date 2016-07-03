@@ -4,7 +4,7 @@ import sys
 from ufs_tools.libtool import include_all
 
 if __name__ == "__main__":
-    #     logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
     try:
         include_all(__file__, "server_base_packages")
     except:

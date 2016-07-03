@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# https://gist.github.com/nigma/4349257
 import os
 import webbrowser
 from threading import Timer
