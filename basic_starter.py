@@ -20,7 +20,8 @@ class UfsBasicStarter(DjangoStarter):
         )
 
     def get_frontend_task_descriptor(self):
-        return self.django_server.get_task_descriptor("runserver", ["0.0.0.0:8110"])
+        # return self.django_server.get_run_server_task_descriptor(["0.0.0.0:8110"])
+        return self.django_server.get_run_server_task_descriptor(["0.0.0.0:8110"])
 
 
 if __name__ == '__main__':
