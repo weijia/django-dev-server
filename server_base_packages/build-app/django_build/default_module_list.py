@@ -83,4 +83,6 @@ DEFAULT_DJANGO_MODULES = [
     # "desktop.filemanager",
     # #"thumbapp.views"
     # "south.db.postgresql_psycopg2"
+    # "distutils.dist",
+    # "distutils.sysconfig",
 ]

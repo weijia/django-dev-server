@@ -64,6 +64,7 @@ class DjangoCxFreezeBuildSpecGenerator(object):
 
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
         self.extend_includes(ModuleDescriptor().get_module_list_from_name("iconizer"))
+        # self.extend_includes(ModuleDescriptor().get_module_list_from_name("distutils"))
         self.existing_config['include_files'].append("static")
         #
         # # Need this for locale

@@ -96,7 +96,9 @@ build_exe_params = {
     'excludes': ['collections.abc',
                  'collections.sys',
                  'cStringIO.errno',
-                 'cStringIO.sys']
+                 'cStringIO.sys',
+                 'distutils.archive_util',
+                 ]
     # "packages": find_packages(),
     # "create_shared_zip": False,
 }
