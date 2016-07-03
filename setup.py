@@ -12,6 +12,11 @@ import _tkinter
 from os.path import dirname
 from cx_Freeze import setup
 
+try:
+    os.remove("local/total_settings.py")
+except:
+    pass
+
 from django_build.app_freeze_config import gen_executable_list, get_pytz_files, \
     get_iconizer_resources
 
@@ -98,9 +103,9 @@ build_exe_params = {
 
 
 # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
-# os.system(sys.executable + " ./manage.py migrate")
-# os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
-# os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
+os.system(sys.executable + " ./manage.py migrate")
+os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
+os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
 os.system(sys.executable + " ./manage.py dump_settings")
 
 # Need to remove port_v3 for QT for cx_freeze when packaging PyQt
