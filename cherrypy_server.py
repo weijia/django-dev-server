@@ -11,18 +11,21 @@ from cherrypy.process import wspbus, plugins
 from cherrypy import _cplogging, _cperror
 from django.core.handlers.wsgi import WSGIHandler
 from django.http import HttpResponseServerError
+import django
+from djangoautoconf import DjangoAutoConf
 
-from manage import initialize_settings
+DjangoAutoConf.set_settings_env()
+django.setup()
 
 print '------------------------------------'
 print sys.path
 
 ##########################################################
 # The following is a work arround for pytz's resource_stream is not imported correctly
-from pkg_resources import resource_stream
-
-
-pytz.resource_stream = resource_stream
+# from pkg_resources import resource_stream
+#
+#
+# pytz.resource_stream = resource_stream
 ##########################################################
 
 
@@ -111,7 +114,6 @@ class DjangoAppPlugin(plugins.SimplePlugin):
         self.bus.log("Configuring the Django application")
         # settings_class_str = 'rootapp.separated_setting_classes.with_ui_framework.WithUiFramework'
         # initialize_settings(settings_class_str)
-        initialize_settings()
 
         self.bus.log("Mounting the Django application")
         cherrypy.tree.graft(HTTPLogger(WSGIHandler()))

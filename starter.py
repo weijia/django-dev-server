@@ -7,8 +7,6 @@ from ufs_tools.libtool import include_all
 include_all(__file__, "server_base_packages")
 
 from iconizer.django_in_iconizer.postgresql_checker import PostgreSqlChecker
-from iconizer.iconizer_app_root import IconizerAppRoot
-
 
 __author__ = 'weijia'
 
@@ -37,7 +35,7 @@ class UfsStarter(DjangoStarter):
                                  # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]})
                                  )
 
-        self.app_root_folder_name = "server_for_django_15_and_below"
+        self.app_root_folder_name = "django-dev-server"
         self.cleanup_tasks = [{"stop_postgre_sql": ["scripts\\postgresql_stop.bat"]}]
 
     def sync_to_main_thread(self):
@@ -45,8 +43,8 @@ class UfsStarter(DjangoStarter):
         p.wait_for_database_ready()
         if not p.is_django_table_created():
             # os.system("python manage_with_conf.py syncdb --noinput")
-            os.system("python manage_with_conf.py migrate")
-            os.system("python manage_with_conf.py create_default_super_user")
+            os.system("python manage.py migrate")
+            os.system("python manage.py create_default_super_user")
 
 
 if __name__ == '__main__':
