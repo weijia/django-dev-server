@@ -7,6 +7,7 @@ import django
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
+include_all(__file__, "server_base_packages")
 from djangoautoconf.setting_utils.app_folders import AppFolderUtil
 import _tkinter
 from os.path import dirname
@@ -19,8 +20,6 @@ except:
 
 from django_build.app_freeze_config import gen_executable_list, get_pytz_files, \
     get_iconizer_resources, create_executable_from_app_name
-
-include_all(__file__, "server_base_packages")
 
 
 root_folder = get_folder(__file__)
