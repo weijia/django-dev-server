@@ -84,7 +84,7 @@ include_files.extend([
 
 excludefiles = []
 zip_includes = get_pytz_files()
-build_exe_dir = "../build/django-dev-server"
+build_exe_dir = "../build/%s" % os.path.dirname(__file__)
 
 build_exe_params = {
     "includes": includes,
