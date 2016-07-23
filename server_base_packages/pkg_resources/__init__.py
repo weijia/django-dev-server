@@ -1,7 +1,7 @@
 
 class Version(object):
     def __init__(self):
-        version = "1.0"
+        self.version = "1.0"
 
-def get_distribution():
+def get_distribution(param):
     return Version()
