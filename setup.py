@@ -3,7 +3,9 @@ import os
 import pprint
 import sys
 import django
+import pytz
 
+from djangoautoconf.auto_conf_utils import get_module_path
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
@@ -78,6 +80,7 @@ include_files.extend(get_iconizer_resources())
 
 include_files.extend([
     ("local", "local"),
+    (get_module_path(pytz), "pytz"),
     ("server_base_packages/distutils", "distutils"),
     ("server_base_packages/pkg_resources", "pkg_resources"),
     # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),

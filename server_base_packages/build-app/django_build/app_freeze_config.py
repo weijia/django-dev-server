@@ -1,7 +1,11 @@
 import os
 
 import sys
+
+import pytz
 from cx_Freeze import Executable
+
+from djangoautoconf.auto_conf_utils import get_module_path
 from ufs_tools import filetools
 
 from iconizer.qtconsole.fileTools import find_resource_in_pkg
@@ -36,11 +40,11 @@ def gen_executable_list(script_list):
 
 
 def get_pytz_files():
-    path_base = "D:\\work\\mine\\venv\\Lib\\site-packages\\pytz\\zoneinfo\\"
+    path_base = get_module_path(pytz)
     exe_path = os.path.dirname(sys.executable)
     if "Scripts" in exe_path:
         exe_path = os.path.dirname(exe_path)
-    path_base = os.path.join(exe_path, "Lib\\site-packages\\pytz\\zoneinfo\\")
+    # path_base = os.path.join(exe_path, "Lib\\site-packages\\pytz\\zoneinfo\\")
     skip_count = len(path_base)
     zip_includes = [(path_base, "pytz/zoneinfo/")]
     for root, sub_folders, files in os.walk(path_base):
