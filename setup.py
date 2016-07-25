@@ -3,7 +3,9 @@ import os
 import pprint
 import sys
 import django
+import pytz
 
+from djangoautoconf.auto_conf_utils import get_module_path
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
@@ -12,6 +14,11 @@ from djangoautoconf.setting_utils.app_folders import AppFolderUtil
 import _tkinter
 from os.path import dirname
 from cx_Freeze import setup
+
+include_all(__file__, "server_base_packages")
+
+from djangoautoconf.setting_utils.app_folders import AppFolderUtil
+
 
 try:
     os.remove("local/total_settings.py")
@@ -49,7 +56,7 @@ django.setup()
 includes = [
     # os.environ["DJANGO_SETTINGS_MODULE"], #rootapp
     "PyQt4.QtCore",
-    "pkg_resources",  # Used by pytz to load time zone info in zoneinfo folder
+    # "pkg_resources",  # Used by pytz to load time zone info in zoneinfo folder
     "yaml",
     # For Cherrypy
     # "django.contrib.messages",
@@ -57,6 +64,8 @@ includes = [
     "email.message",
     "cherrypy",
     "iconizer",
+    # "zope",
+    "zope.interface",
     "django.core.management",
     "django.core.management.commands.syncdb",
 ]
@@ -73,6 +82,9 @@ include_files.extend(get_iconizer_resources())
 
 include_files.extend([
     ("local", "local"),
+    (get_module_path(pytz), "pytz"),
+    ("server_base_packages/distutils", "distutils"),
+    ("server_base_packages/pkg_resources", "pkg_resources"),
     # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),
     # ("libs/zlib1.dll", "libs/zlib1.dll"),
     # ("libs/regex2.dll", "libs/regex2.dll"),
@@ -83,7 +95,7 @@ include_files.extend([
 
 excludefiles = []
 zip_includes = get_pytz_files()
-build_exe_dir = "../build/django-dev-server"
+build_exe_dir = "../build/%s" % os.path.dirname(__file__)
 
 build_exe_params = {
     "includes": includes,
@@ -125,7 +137,8 @@ os.environ["TK_LIBRARY"] = os.path.join(python_dir, tk_lib_path_name)
 DjangoCxFreezeBuildSpecGenerator().gen_spec(settings, build_exe_params)
 
 final_script_list = gen_executable_list(app_list)
-final_script_list.append(create_executable_from_app_name("starter", base="Win32GUI"))
+final_script_list.append(create_executable_from_app_name("starter"))
+# final_script_list.append(create_executable_from_app_name("starter", base="Win32GUI"))
 pprint.pprint(build_exe_params)
 setup(
     version="0.1",  # This is required or build process will have exception.
