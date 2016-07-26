@@ -3,7 +3,9 @@ import os
 import pprint
 import sys
 import django
+import pkg_resources
 import pytz
+import zope.interface
 
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
@@ -67,7 +69,7 @@ includes = [
     "cherrypy",
     "iconizer",
     # "zope",
-    "zope.interface",
+    # "zope.interface",
     "django.core.management",
     "django.core.management.commands.syncdb",
 ]
@@ -85,8 +87,10 @@ include_files.extend(get_iconizer_resources())
 include_files.extend([
     ("local", "local"),
     (get_module_path(pytz), "pytz"),
+    (get_module_path(zope.interface), "zope/interface"),
+    (get_module_path(pkg_resources), "pkg_resources"),
     ("server_base_packages/distutils", "distutils"),
-    ("server_base_packages/pkg_resources", "pkg_resources"),
+    # ("server_base_packages/pkg_resources", "pkg_resources"),
     # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),
     # ("libs/zlib1.dll", "libs/zlib1.dll"),
     # ("libs/regex2.dll", "libs/regex2.dll"),
@@ -96,8 +100,8 @@ include_files.extend([
 ])
 
 excludefiles = []
-zip_includes = get_pytz_files()
-build_exe_dir = "../build/%s" % os.path.dirname(__file__)
+zip_includes = []  # get_pytz_files()
+build_exe_dir = "../build/%s" % os.path.basename(os.path.dirname(__file__))
 
 build_exe_params = {
     "includes": includes,
