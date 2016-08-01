@@ -5,6 +5,7 @@ import sys
 import django
 import pytz
 
+import iconizer
 from djangoautoconf.auto_conf_utils import get_module_path
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
@@ -61,11 +62,11 @@ includes = [
     "email",
     "email.message",
     "cherrypy",
-    "iconizer",
+    # "iconizer",
     # "zope",
     "zope.interface",
-    "django.core.management",
-    "django.core.management.commands.syncdb",
+    # "django.core.management",
+    # "django.core.management.commands.syncdb",
 ]
 
 app_list = [
@@ -80,7 +81,9 @@ include_files.extend(get_iconizer_resources())
 
 include_files.extend([
     ("local", "local"),
+    ("scripts", "scripts"),
     (get_module_path(pytz), "pytz"),
+    (get_module_path(iconizer), "iconizer"),
     ("server_base_packages/distutils", "distutils"),
     ("server_base_packages/pkg_resources", "pkg_resources"),
     # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),
