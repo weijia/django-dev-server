@@ -19,7 +19,7 @@ django.setup()
 
 class DjangoApplication(object):
     HOST = "127.0.0.1"
-    PORT = 8001
+    PORT = 8110
 
     def mount_static(self, url, root):
         """
@@ -56,5 +56,5 @@ class DjangoApplication(object):
 
 
 if __name__ == "__main__":
-    print "Your app is running at http://localhost:8001"
+    print "Your app is running at http://localhost:%d" % DjangoApplication.PORT
     DjangoApplication().run()
