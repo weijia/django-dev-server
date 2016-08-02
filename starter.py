@@ -8,8 +8,6 @@ from iconizer.iconizer_task_config import IconizerTaskConfig
 
 include_all(__file__, "server_base_packages")
 
-from iconizer.django_in_iconizer.django_postgresql_starter import DjangoPostgreSqlStarter
-
 
 __author__ = 'weijia'
 
