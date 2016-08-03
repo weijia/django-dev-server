@@ -7,8 +7,6 @@ import django
 import pkg_resources
 import pytz
 
-
-import iconizer
 import zope.interface
 import _tkinter
 from os.path import dirname
@@ -17,8 +15,10 @@ from cx_Freeze import setup
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
-include_all(__file__, "server_base_packages")
 
+
+include_all(__file__, "server_base_packages")
+import iconizer
 
 from djangoautoconf.auto_conf_utils import get_module_path
 from djangoautoconf.setting_utils.app_folders import AppFolderUtil
