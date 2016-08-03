@@ -12,21 +12,20 @@ from iconizer.qtconsole.fileTools import find_resource_in_pkg
 
 
 def create_executable_from_app_name(app_param, base=None):
-    if type(app_param) != tuple:
-        app_full_name = app_param + ".py"
-        app_path = filetools.find_filename_in_app_framework_with_pattern(app_full_name)
-        if app_path is None:
-            return None
-            # print "app:", app_path
-        if base is None:
-            return Executable(script=app_path)
-        else:
-            return Executable(script=app_path, base=base)
-    else:
-        app_full_name = app_param[0] + ".py"
-        app_path = filetools.find_filename_in_app_framework_with_pattern(app_full_name)
-        # print "app with target:", app_path
-        return Executable(script=app_path, targetName=app_param[1])
+    executable_param_dict = {}
+    app_name = app_param
+    if type(app_param) == tuple:
+        executable_param_dict["targetName"] = app_param[1]
+        app_name = app_param[0]
+
+    app_name_pattern = r'^' + app_name + r"\.py$"
+    app_path = filetools.find_filename_in_app_framework_with_pattern(app_name_pattern)
+
+    executable_param_dict["script"] = app_path
+
+    if base is not None:
+        executable_param_dict["base"] = base
+    return Executable(**executable_param_dict)
 
 
 def gen_executable_list(script_list):

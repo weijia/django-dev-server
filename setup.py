@@ -72,17 +72,12 @@ def main():
     ]
 
     app_list = [
-        # 'starter',
+        'starter',
         'manage',
         'cherrypy_server',
     ]
 
-    additional_config_json_file_path = "local/additional_exe_config.json"
-    os.path.exists(additional_config_json_file_path)
-    additional_exe_config_file = open(additional_config_json_file_path)
-    additional_config = json.load(additional_exe_config_file)
-
-    app_list.extend(additional_config["additional_apps"])
+    add_additional_apps(app_list)
 
     include_files = []
 
@@ -139,7 +134,7 @@ def main():
     final_script_list = gen_executable_list(app_list)
     final_script_list.append(create_executable_from_app_name("starter"))
     # final_script_list.append(create_executable_from_app_name("starter", base="Win32GUI"))
-    pprint.pprint(build_exe_params)
+    # pprint.pprint(build_exe_params)
     setup(
         version="0.1",  # This is required or build process will have exception.
         description="application starter",
@@ -151,6 +146,14 @@ def main():
     )
 
     remove_if_exists(total_setting_file_path)
+
+
+def add_additional_apps(app_list):
+    additional_config_json_file_path = "local/additional_exe_config.json"
+    if os.path.exists(additional_config_json_file_path):
+        additional_exe_config_file = open(additional_config_json_file_path)
+        additional_config = json.load(additional_exe_config_file)
+        app_list.extend(additional_config["additional_apps"])
 
 
 def set_env_var_for_tkinter_in_exe():
