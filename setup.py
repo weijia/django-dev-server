@@ -3,11 +3,12 @@ import json
 import os
 import pprint
 import sys
-
-import certifi
 import django
 import pkg_resources
 import pytz
+
+
+import iconizer
 import zope.interface
 import _tkinter
 from os.path import dirname
@@ -65,7 +66,9 @@ def main():
         "email",
         "email.message",
         "cherrypy",
-        "iconizer",
+        #"iconizer",
+        "django.core.management",
+        "django.core.management.commands.syncdb",
     ]
 
     app_list = [
@@ -90,11 +93,11 @@ def main():
         # Required for pytz, otherwise, although build will be done, there will be timezone not found error in runtime
         # Used by pytz to load time zone info in zoneinfo folder
         (get_module_path(pytz), "pytz"),
+        (get_module_path(iconizer), "iconizer"),
         (get_module_path(zope.interface), "zope/interface"),
         (get_module_path(pkg_resources), "pkg_resources"),
-        # The following is used to fix "File not found" issue when using HTTPS, certifi will find cert.pem
-        (get_module_path(certifi), "certifi"),
         ("server_base_packages/distutils", "distutils"),
+        # ("server_base_packages/pkg_resources", "pkg_resources"),
         # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),
         # ("libs/zlib1.dll", "libs/zlib1.dll"),
         # ("libs/regex2.dll", "libs/regex2.dll"),

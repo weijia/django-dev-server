@@ -1,8 +1,14 @@
+django-bootstrap3
+django-admin-bootstrapped
 django-reversion
-django
+django-guardian
 django-jquery-ui
 django-mptt
 django-oauth2-provider
+django-import-export
+easy-thumbnails
+django-userena
+
 # Optional requirements
 ipython[notebook]
 #towel_bootstrap
@@ -13,4 +19,4 @@ jsonschema
 django-tastypie
 django-compat
 ufs-tools
-djangoautoconf
+#djangoautoconf
