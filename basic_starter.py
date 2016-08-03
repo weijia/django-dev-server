@@ -28,5 +28,5 @@ class UfsBasicStarter(DjangoStarter):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
     UfsBasicStarter().start_iconized_applications()

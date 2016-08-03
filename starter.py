@@ -1,52 +1,46 @@
 import logging
 import os
-
-from iconizer.django_in_iconizer.django_starter import DjangoStarter
 from ufs_tools.libtool import include_all
+
+from iconizer.django_in_iconizer.postgresql_checker import PostgreSqlChecker
+from iconizer.iconizer_app_root_v2 import IconizerAppRootV2
+from iconizer.iconizer_task_config import IconizerTaskConfig
 
 include_all(__file__, "server_base_packages")
 
-from iconizer.django_in_iconizer.postgresql_checker import PostgreSqlChecker
 
 __author__ = 'weijia'
 
 log = logging.getLogger(__name__)
 
 os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
-os.environ["UFS_DATABASE"] = "sqlite"
+# os.environ["UFS_DATABASE"] = "sqlite"
 
 
-class UfsStarter(DjangoStarter):
-    # noinspection PyAttributeOutsideInit
-    def init_parameters(self):
-        super(UfsStarter, self).init_parameters()
-        self.front_end_task = {"postgre_sql": ["scripts\\postgresql.bat"]}
-        self.background_tasks = (
-                                 # {"web_server": ["manage_with_conf.py", "runserver", "8110"]},
-                                 # django_server.get_django_task("create_default_super_user"),
-                                 # django_server.get_django_task("migrate"),
-                                 # django_server.get_django_task("syncdb", ["--noinput"]),
-                                 # django_server.get_django_task("drop_tagger"),
-                                 # {"background_tasks": ["manage_with_conf.py", "process_tasks"]},
-                                 # {"ipynb": ["manage.py", "shell_ipynb"]},
-                                 # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]},
-                                 # {"clipboard_monitor": ["manage.py", "clipboard_monitor_task"]},
-                                 # {"web_server": ["cherrypy_server.py", ]}),
-                                 # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]})
-                                 )
+# noinspection PyMethodMayBeStatic
+class UfsStarterConfig(IconizerTaskConfig):
+    def get_cleanup_task_descriptors(self):
+        return [{"stop_postgresql": ["scripts\\postgresql_stop.bat"]}]
 
-        self.app_root_folder_name = "django-dev-server"
-        self.cleanup_tasks = [{"stop_postgre_sql": ["scripts\\postgresql_stop.bat"]}]
+    def get_frontend_task_descriptor(self):
+        return {"postgresql": ["scripts\\postgresql.bat"]}
+
+    def get_background_tasks(self):
+        return (
+            self.django_server.get_task_descriptor("git_pull_all"),
+        )
 
     def sync_to_main_thread(self):
         p = PostgreSqlChecker()
         p.wait_for_database_ready()
         if not p.is_django_table_created():
-            # os.system("python manage_with_conf.py syncdb --noinput")
-            os.system("python manage.py migrate")
-            os.system("python manage.py create_default_super_user")
+            self.init_ufs_db()
+
+    def init_ufs_db(self):
+        self.django_server.execute_cmd("migrate")
+        self.django_server.execute_cmd("create_default_super_user")
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
-    UfsStarter().start_iconized_applications()
+    # logging.basicConfig(level=logging.DEBUG)
+    IconizerAppRootV2(UfsStarterConfig()).start_iconized_applications()
