@@ -1,7 +1,12 @@
+import logging
+
 from ufs_tools.libtool import include_all
 
-#     logging.basicConfig(level=logging.DEBUG)
-include_all(__file__, "server_base_packages")
+# logging.basicConfig(level=logging.DEBUG)
+try:
+    include_all(__file__, "server_base_packages")
+except:
+    pass
 from djangoautoconf import DjangoAutoConf
 
 DjangoAutoConf.set_settings_env()

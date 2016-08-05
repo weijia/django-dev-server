@@ -93,6 +93,7 @@ def main():
         (get_module_path(zope.interface), "zope/interface"),
         (get_module_path(pkg_resources), "pkg_resources"),
         ("server_base_packages/distutils", "distutils"),
+        ("ipython_config.py", "ipython_config.py"),
         ScriptExe("jupyter.exe").get_the_include_files_config_for_script_exe(),
         ScriptExe("jupyter-notebook.exe").get_the_include_files_config_for_script_exe(),
 
