@@ -12,6 +12,7 @@ import _tkinter
 from os.path import dirname
 from cx_Freeze import setup
 
+from django_build.python_env_utils import ScriptExe
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
@@ -92,6 +93,9 @@ def main():
         (get_module_path(zope.interface), "zope/interface"),
         (get_module_path(pkg_resources), "pkg_resources"),
         ("server_base_packages/distutils", "distutils"),
+        ScriptExe("jupyter.exe").get_the_include_files_config_for_script_exe(),
+        ScriptExe("jupyter-notebook.exe").get_the_include_files_config_for_script_exe(),
+
         # ("server_base_packages/pkg_resources", "pkg_resources"),
         # #("libs/allauth/fixtures/initial_data.json", "initial_data.json"),
         # ("libs/zlib1.dll", "libs/zlib1.dll"),
