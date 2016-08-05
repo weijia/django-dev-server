@@ -18,17 +18,18 @@ import _tkinter
 from os.path import dirname
 from cx_Freeze import setup
 
-from django_build.python_env_utils import ScriptExe
+
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
 import ipykernel
 
 include_all(__file__, "server_base_packages")
+from django_build.python_env_utils import ScriptExe
 import iconizer
 
-from djangoautoconf.auto_conf_utils import get_module_path, get_module_file_path, get_module_filename, \
-    get_module_include_files_config
+from djangoautoconf.auto_conf_utils import get_module_path  # , # get_module_file_path, get_module_filename
+    # get_module_include_files_config
 from djangoautoconf.setting_utils.app_folders import AppFolderUtil
 from django_build.app_freeze_config import gen_executable_list, get_iconizer_resources, create_executable_from_app_name
 from django_build.django_setup import DjangoCxFreezeBuildSpecGenerator
@@ -102,10 +103,10 @@ def main():
         (get_module_path(pkg_resources), "pkg_resources"),
         (get_module_path(certifi), "certifi"),
         ("server_base_packages/distutils", "distutils"),
-        get_module_include_files_config(dir_util, "distutils"),
-        get_module_include_files_config(errors, "distutils"),
-        get_module_include_files_config(log, "distutils"),
-        get_module_include_files_config(version, "distutils"),
+        # get_module_include_files_config(dir_util, "distutils"),
+        # get_module_include_files_config(errors, "distutils"),
+        # get_module_include_files_config(log, "distutils"),
+        # get_module_include_files_config(version, "distutils"),
         ("ipython_config.py", "ipython_config.py"),
         ScriptExe("jupyter.exe").get_the_include_files_config_for_script_exe(),
         ScriptExe("jupyter-notebook.exe").get_the_include_files_config_for_script_exe(),
@@ -141,9 +142,9 @@ def main():
     }
 
     # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
-    os.system(sys.executable + " ./manage.py migrate")
-    os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
-    os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
+    # os.system(sys.executable + " ./manage.py migrate")
+    # os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
+    # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
     os.system(sys.executable + " ./manage.py dump_settings")
 
     # Need to remove port_v3 for QT for cx_freeze when packaging PyQt

@@ -28,6 +28,7 @@ class UfsStarterConfig(IconizerTaskConfig):
     def get_background_tasks(self):
         return (
             self.django_server.get_task_descriptor("git_pull_all"),
+            self.django_server.get_task_descriptor("export_evernote"),
         )
 
     def sync_to_main_thread(self):

@@ -32,6 +32,7 @@ class FrozenApp(object):
 
 
 class ScriptApp(object):
+    # noinspection PyMethodMayBeStatic
     def get_exe_full_path(self, exe_name):
         script_exe = ScriptExe(exe_name)
         if os.path.exists(script_exe.get_python_script_exe()):
