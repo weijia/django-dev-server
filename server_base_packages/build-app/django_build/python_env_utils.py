@@ -16,4 +16,4 @@ class ScriptExe(object):
         return os.path.join(os.path.dirname(self.get_python_executable()), self.script_name)
 
     def get_the_include_files_config_for_script_exe(self):
-        return self.get_python_script_exe(self.script_name), self.script_name
+        return self.get_python_script_exe(), self.script_name
