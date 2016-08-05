@@ -3,6 +3,12 @@ import json
 import os
 import pprint
 import sys
+from distutils import dir_util
+from distutils import errors
+from distutils import log
+from distutils import version
+
+import certifi
 import django
 import pkg_resources
 import pytz
@@ -16,12 +22,13 @@ from django_build.python_env_utils import ScriptExe
 from ufs_tools import get_folder
 from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
-
+import ipykernel
 
 include_all(__file__, "server_base_packages")
 import iconizer
 
-from djangoautoconf.auto_conf_utils import get_module_path
+from djangoautoconf.auto_conf_utils import get_module_path, get_module_file_path, get_module_filename, \
+    get_module_include_files_config
 from djangoautoconf.setting_utils.app_folders import AppFolderUtil
 from django_build.app_freeze_config import gen_executable_list, get_iconizer_resources, create_executable_from_app_name
 from django_build.django_setup import DjangoCxFreezeBuildSpecGenerator
@@ -89,10 +96,16 @@ def main():
         # Required for pytz, otherwise, although build will be done, there will be timezone not found error in runtime
         # Used by pytz to load time zone info in zoneinfo folder
         (get_module_path(pytz), "pytz"),
+        (get_module_path(ipykernel), "ipykernel"),
         (get_module_path(iconizer), "iconizer"),
         (get_module_path(zope.interface), "zope/interface"),
         (get_module_path(pkg_resources), "pkg_resources"),
+        (get_module_path(certifi), "certifi"),
         ("server_base_packages/distutils", "distutils"),
+        get_module_include_files_config(dir_util, "distutils"),
+        get_module_include_files_config(errors, "distutils"),
+        get_module_include_files_config(log, "distutils"),
+        get_module_include_files_config(version, "distutils"),
         ("ipython_config.py", "ipython_config.py"),
         ScriptExe("jupyter.exe").get_the_include_files_config_for_script_exe(),
         ScriptExe("jupyter-notebook.exe").get_the_include_files_config_for_script_exe(),
@@ -120,6 +133,8 @@ def main():
                      'cStringIO.errno',
                      'cStringIO.sys',
                      'distutils.archive_util',
+                     'mock',  # So include distutils will not report error
+                     'certifi',
                      ]
         # "packages": find_packages(),
         # "create_shared_zip": False,

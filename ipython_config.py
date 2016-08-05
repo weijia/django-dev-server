@@ -1,15 +1,24 @@
 import logging
+import sys
+import os
 
+from ufs_tools import get_folder
+from ufs_tools.app_tools import get_executable_folder
+from ufs_tools.basic_lib_tool import include
 from ufs_tools.libtool import include_all
 
 # logging.basicConfig(level=logging.DEBUG)
 try:
     include_all(__file__, "server_base_packages")
 except:
-    pass
+    include(get_executable_folder())
+
+
 from djangoautoconf import DjangoAutoConf
 
-DjangoAutoConf.set_settings_env()
+root_folder = get_folder(__file__)
+
+DjangoAutoConf.set_settings_env(root_folder)
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
