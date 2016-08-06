@@ -57,6 +57,16 @@ class DjangoPackager(PackageConfigBase):
             'tablib',
             'diff_match_patch',
             'daphne',
+            'tendo',
+            'win32file',
+            'git',
+            'smmap',
+            'gitdb',
+            '_multiprocessing',
+            'multiprocessing',
+            'evernote',
+            'thrift',
+            'tastypie',
         ]
 
     def prepare(self):
