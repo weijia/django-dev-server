@@ -2,6 +2,9 @@ from cx_Freeze import setup
 from ufs_tools.python_app_utils.base import AppBase
 import sys
 
+from django_build.package_configs.twisted_packager import TwistedPackager
+
+
 def main():
     AppBase().add_default_module_path()
 
@@ -15,6 +18,7 @@ def main():
         BasicPackager(),
         IconizerPackage(),
         DjangoPackager(),
+        TwistedPackager()
     ]
 
     run_packager_prepare(packager_list)

@@ -33,7 +33,31 @@ class DjangoPackager(PackageConfigBase):
             # runtime Used by pytz to load time zone info in zoneinfo folder
             (get_module_path(pytz), "pytz"),
         ]
-        self.excludes = ["pytz"]
+        self.excludes = [
+            "pytz",
+            "distutils",
+            "pkg_resources",
+        ]
+        self.include_module_names = [
+            'htmlentitydefs',
+            'HTMLParser',
+            'markupbase',
+            'shortuuid',
+            'persisting_theory',
+            'csv',
+            'appconf',
+            'annoying',
+            'html2text',
+            'requests',
+            'openid',
+            'oauthlib',
+            'markdown',
+            'dateutil',
+            'ufs_tools',
+            'tablib',
+            'diff_match_patch',
+            'daphne',
+        ]
 
     def prepare(self):
 
@@ -43,6 +67,8 @@ class DjangoPackager(PackageConfigBase):
 
         from django.conf import settings
         # include_files.extend(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
+
+        old_modules = sys.modules.keys()
 
         for installed_app in settings.INSTALLED_APPS:
             app_root_name = installed_app
@@ -55,6 +81,16 @@ class DjangoPackager(PackageConfigBase):
                 self.include_files.append(include_config)
 
             self.include_default_files_in_django_app(app_root_name)
+
+        new_modules = sys.modules.keys()
+
+        for i in new_modules:
+            if i not in old_modules:
+                module = i
+                if "." in i:
+                    module = module.split(".")[0]
+                if module not in self.excludes:
+                    self.include_module_names.append(module)
 
         # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
         # os.system(sys.executable + " ./manage.py migrate")
@@ -130,21 +166,7 @@ class DjangoPackager(PackageConfigBase):
         return self.include_files
 
     def get_include_module_names(self):
-        return [
-            'htmlentitydefs',
-            'HTMLParser',
-            'markupbase',
-            'shortuuid',
-            'persisting_theory',
-            'csv',
-            'appconf',
-            'annoying',
-            'html2text',
-            'requests',
-            'openid',
-            'oauthlib',
-            'markdown',
-        ]
+        return self.include_module_names
 
     def post_setup(self):
         remove_if_exists(self.total_settings_py)
