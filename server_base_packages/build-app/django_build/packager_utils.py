@@ -29,7 +29,7 @@ def combine_tuple(existing_list, new_item_list):
 
 
 def get_build_exe_params(packager_list):
-    build_exe_dir = "../build_new/%s" % os.path.basename(get_executable_folder())
+    build_exe_dir = "../build/%s" % os.path.basename(get_executable_folder())
 
     ###########################
     # Add python module that is not automatically included in the build below. Such as Django app
@@ -58,7 +58,7 @@ def get_build_exe_params(packager_list):
 
 def combine(base_list, new_item_list):
     base_list.extend(new_item_list)
-    return list(tuple(base_list))
+    return list(set(base_list))
 
 
 def run_packager_prepare(packager_list):
