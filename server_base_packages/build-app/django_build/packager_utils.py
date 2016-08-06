@@ -1,5 +1,7 @@
 import os
 
+from ufs_tools.app_tools import get_executable_folder
+
 from django_build.app_freeze_config import create_executable_from_app_name
 
 
@@ -27,7 +29,7 @@ def combine_tuple(existing_list, new_item_list):
 
 
 def get_build_exe_params(packager_list):
-    build_exe_dir = "../build_new/%s" % os.path.basename(os.path.dirname(__file__))
+    build_exe_dir = "../build_new/%s" % os.path.basename(get_executable_folder())
 
     ###########################
     # Add python module that is not automatically included in the build below. Such as Django app

@@ -1,12 +1,13 @@
 import logging
 import os
-from ufs_tools.libtool import include_all
+
+from ufs_tools.python_app_utils.base import AppBase
+
+AppBase().add_default_module_path()
 
 from iconizer.django_in_iconizer.postgresql_checker import PostgreSqlChecker
 from iconizer.iconizer_app_root_v2 import IconizerAppRootV2
 from iconizer.iconizer_task_config import IconizerTaskConfig
-
-include_all(__file__, "server_base_packages")
 
 
 __author__ = 'weijia'
