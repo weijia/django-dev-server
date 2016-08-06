@@ -1,10 +1,8 @@
+import json
 import os
-
 import sys
-
 import pytz
 
-from django_build.module_processor import ModuleDescriptor
 from django_build.package_configs.base import PackageConfigBase
 from djangoautoconf import DjangoAutoConf
 from djangoautoconf.auto_conf_utils import get_module_path
@@ -26,6 +24,20 @@ class DjangoPackager(PackageConfigBase):
         # os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
+
+    def get_executable_names(self):
+        app_list = [
+            'starter',
+            'manage',
+            'cherrypy_server',
+        ]
+
+        additional_config_json_file_path = "local/additional_exe_config.json"
+        if os.path.exists(additional_config_json_file_path):
+            additional_exe_config_file = open(additional_config_json_file_path)
+            additional_config = json.load(additional_exe_config_file)
+            app_list.extend(additional_config["additional_apps"])
+        return app_list
 
     def get_include_files_or_folders_with_target(self):
 
@@ -55,15 +67,6 @@ class DjangoPackager(PackageConfigBase):
                 res.append(include_config)
 
         return res
-
-    def get_include_config(self, app_root_name):
-        include_config = None
-        try:
-            app_module = __import__(app_root_name, fromlist="dummy")
-            include_config = (app_module.__path__[0], app_root_name)
-        except:
-            pass
-        return include_config
 
     def post_setup(self):
         remove_if_exists(self.total_settings_py)

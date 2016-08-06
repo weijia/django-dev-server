@@ -15,6 +15,17 @@ def get_executables(packager_list):
     return res
 
 
+def combine_tuple(existing_list, new_item_list):
+    refined = []
+    refined_source = []
+    existing_list.extend(new_item_list)
+    for t in existing_list:
+        if t[0] not in refined_source:
+            refined_source.append(t[0])
+            refined.append(t)
+    return refined
+
+
 def get_build_exe_params(packager_list):
     build_exe_dir = "../build_new/%s" % os.path.basename(os.path.dirname(__file__))
 
@@ -28,7 +39,7 @@ def get_build_exe_params(packager_list):
 
     for package in packager_list:
         includes = combine(includes, package.get_include_module_names())
-        include_files = combine(include_files, package.get_include_files_or_folders_with_target())
+        include_files = combine_tuple(include_files, package.get_include_files_or_folders_with_target())
         excludes = combine(excludes, package.get_excluded_module_names())
 
     return {
@@ -46,6 +57,11 @@ def get_build_exe_params(packager_list):
 def combine(base_list, new_item_list):
     base_list.extend(new_item_list)
     return list(tuple(base_list))
+
+
+def run_packager_prepare(packager_list):
+    for package in packager_list:
+        package.prepare()
 
 
 def run_packager_post_setup(packager_list):

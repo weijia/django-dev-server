@@ -3,16 +3,21 @@ from cx_Freeze import setup
 from django_build.package_configs.basic_packager import BasicPackager
 from django_build.package_configs.django_packager import DjangoPackager
 from django_build.package_configs.iconizer_packager import IconizerPackage
-from django_build.packager_utils import get_build_exe_params, get_executables, run_packager_post_setup
+from django_build.packager_utils import get_build_exe_params, get_executables, run_packager_post_setup, \
+    run_packager_prepare
+from djangoautoconf.python_app_utils.base import AppBase
 
 
 def main():
-
+    AppBase().add_default_module_path()
+    
     packager_list = [
         BasicPackager(),
         IconizerPackage(),
         DjangoPackager(),
     ]
+
+    run_packager_prepare(packager_list)
 
     setup(
         version="0.1",  # This is required or build process will have exception.

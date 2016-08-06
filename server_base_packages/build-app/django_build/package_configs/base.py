@@ -17,3 +17,12 @@ class PackageConfigBase(object):
 
     def post_setup(self):
         pass
+
+    def get_include_config(self, app_root_name):
+        include_config = None
+        try:
+            app_module = __import__(app_root_name, fromlist="dummy")
+            include_config = (app_module.__path__[0], app_root_name)
+        except:
+            pass
+        return include_config
