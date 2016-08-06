@@ -4,10 +4,12 @@ import sys
 
 import pkg_resources
 import pytz
+from ufs_tools import get_folder
+from ufs_tools.short_decorator.ignore_exception import ignore_exc
 
 from django_build.package_configs.base import PackageConfigBase
 from djangoautoconf import DjangoAutoConf
-from djangoautoconf.auto_conf_utils import get_module_path
+from djangoautoconf.auto_conf_utils import get_module_path, enum_folders, enum_modules
 
 
 def remove_if_exists(file_path):
@@ -111,15 +113,7 @@ class DjangoPackager(PackageConfigBase):
     def include_default_files_in_django_app(self, django_app_name):
         for django_sub_module in ['urls', 'views', 'admin', 'api', 'models', 'forms', 'decorators', 'mixins',
                                   'management', 'migrations']:
-            try:
-                self.add_sub_module_for_module(django_app_name, django_sub_module)
-            except ImportError, e:
-                # print e
-                # print e.message
-                # print e.args
-                if ("No module named %s" % django_sub_module) == e.message:
-                    pass
-                    # raise
+            self.import_django_sub_module(django_app_name, django_sub_module)
 
         self.import_modules_in_urls(django_app_name)
 
@@ -142,21 +136,17 @@ class DjangoPackager(PackageConfigBase):
             # import traceback
             # traceback.print_exc()
 
-        for url_pattern in url_patterns:
-            # print url_pattern
-            try:
-                print url_pattern._callback_str
-                # self.add_module_for_class(url_pattern._callback_str)
-            except:
-                # import traceback
-                # traceback.print_exc()
-                pass
-
     # noinspection PyMethodMayBeStatic
-    def add_sub_module_for_module(self, django_app_name, django_sub_module):
+    @ignore_exc
+    def import_django_sub_module(self, django_app_name, django_sub_module):
         # print django_app_name + "." + django_sub_module
         sub_module_import_name = django_app_name + "." + django_sub_module
-        __import__(sub_module_import_name)
+        module = __import__(sub_module_import_name)
+        if django_sub_module == "management":
+            command_folder = os.path.join(get_folder(module.__file__), "commands")
+            if os.path.exists(command_folder):
+                for module_name in enum_modules(command_folder):
+                    __import__(sub_module_import_name + "commands." + module_name)
 
     def get_executable_names(self):
         app_list = [
