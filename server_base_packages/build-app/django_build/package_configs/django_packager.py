@@ -69,6 +69,9 @@ class DjangoPackager(PackageConfigBase):
             'evernote',
             'thrift',
             'tastypie',
+            'jwt',
+            'requests_oauthlib',
+            'braces',
         ]
 
     def prepare(self):
