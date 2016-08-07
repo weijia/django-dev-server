@@ -2,6 +2,8 @@ import json
 import os
 import sys
 
+import annoying
+import dateutil
 import pkg_resources
 import pytz
 from ufs_tools import get_folder
@@ -31,6 +33,9 @@ class DjangoPackager(PackageConfigBase):
             ("scripts", "scripts"),
             ("server_base_packages/distutils", "distutils"),
             (get_module_path(pkg_resources), "pkg_resources"),
+            # Not sure why the following is not included as in includes.
+            (get_module_path(dateutil), "dateutil"),
+            (get_module_path(annoying), "annoying"),
             # Required for pytz, otherwise, although build will be done, there will be timezone not found error in
             # runtime Used by pytz to load time zone info in zoneinfo folder
             (get_module_path(pytz), "pytz"),
@@ -40,7 +45,9 @@ class DjangoPackager(PackageConfigBase):
             "distutils",
             "pkg_resources",
         ]
-        self.include_module_names = [
+        self.include_module_names = []
+
+        force_include_module = [
             'htmlentitydefs',
             'HTMLParser',
             'markupbase',
@@ -74,6 +81,9 @@ class DjangoPackager(PackageConfigBase):
             'braces',
         ]
 
+        for m in force_include_module:
+            self.add_module_to_include_files(m)
+
     def prepare(self):
 
         DjangoAutoConf.set_settings_env()
@@ -90,10 +100,7 @@ class DjangoPackager(PackageConfigBase):
             if "." in installed_app:
                 app_root_name = installed_app.split(".")[0]
 
-            self.excludes.append(app_root_name)
-            include_config = self.get_include_config(app_root_name)
-            if include_config:
-                self.include_files.append(include_config)
+            self.add_module_to_include_files(app_root_name)
 
             self.include_default_files_in_django_app(app_root_name)
 
@@ -112,6 +119,12 @@ class DjangoPackager(PackageConfigBase):
         # os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
+
+    def add_module_to_include_files(self, app_root_name):
+        self.excludes.append(app_root_name)
+        include_config = self.get_include_config(app_root_name)
+        if include_config:
+            self.include_files.append(include_config)
 
     def include_default_files_in_django_app(self, django_app_name):
         for django_sub_module in ['urls', 'views', 'admin', 'api', 'models', 'forms', 'decorators', 'mixins',

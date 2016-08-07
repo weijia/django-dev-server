@@ -2,6 +2,7 @@ import logging
 import os
 
 from ufs_tools.python_app_utils.base import AppBase
+from ufs_tools.file_search import find_filename_in_app_folder
 
 AppBase().add_default_module_path()
 
@@ -21,10 +22,12 @@ os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
 # noinspection PyMethodMayBeStatic
 class UfsStarterConfig(IconizerTaskConfig):
     def get_cleanup_task_descriptors(self):
-        return [{"stop_postgresql": ["scripts\\postgresql_stop.bat"]}]
+        stop_script = find_filename_in_app_folder("postgresql_stop.bat")
+        return [{"stop_postgresql": [stop_script]}]
 
     def get_frontend_task_descriptor(self):
-        return {"postgresql": ["scripts\\postgresql.bat"]}
+        start_script = find_filename_in_app_folder("postgresql.bat")
+        return {"postgresql": [start_script]}
 
     def get_background_tasks(self):
         return (
