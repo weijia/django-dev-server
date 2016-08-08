@@ -1,4 +1,7 @@
 # noinspection PyMethodMayBeStatic
+from djangoautoconf.auto_conf_utils import get_module_path
+
+
 class PackageConfigBase(object):
     def prepare(self):
         pass
@@ -22,7 +25,7 @@ class PackageConfigBase(object):
         include_config = None
         try:
             app_module = __import__(app_root_name, fromlist="dummy")
-            include_config = (app_module.__path__[0], app_root_name)
+            include_config = (get_module_path(app_module), app_root_name)
         except:
             pass
         return include_config
