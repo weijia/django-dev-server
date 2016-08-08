@@ -1,5 +1,7 @@
 # noinspection PyMethodMayBeStatic
-from djangoautoconf.auto_conf_utils import get_module_path
+import os
+
+from djangoautoconf.auto_conf_utils import get_module_path, get_source_filename
 
 
 class PackageConfigBase(object):
@@ -25,7 +27,12 @@ class PackageConfigBase(object):
         include_config = None
         try:
             app_module = __import__(app_root_name, fromlist="dummy")
-            include_config = (get_module_path(app_module), app_root_name)
-        except:
+            module_file_full_path = app_module.__file__
+            if os.path.basename(module_file_full_path) != "__init__.pyc":
+                include_config = (get_source_filename(module_file_full_path),
+                                  get_source_filename(os.path.basename(module_file_full_path)))
+            else:
+                include_config = (os.path.dirname(module_file_full_path), app_root_name)
+        except Exception, e:
             pass
         return include_config
