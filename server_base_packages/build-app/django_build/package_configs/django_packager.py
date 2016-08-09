@@ -14,6 +14,11 @@ from djangoautoconf import DjangoAutoConf
 from djangoautoconf.auto_conf_utils import get_module_path, enum_folders, enum_modules
 
 
+def import_sub_module(name):
+    __import__(name)
+    return sys.modules[name]
+
+
 def remove_if_exists(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
@@ -47,7 +52,7 @@ class DjangoPackager(PackageConfigBase):
         ]
         self.include_module_names = []
 
-        force_include_module = [
+        self.force_include_module = [
             'htmlentitydefs',
             'HTMLParser',
             'markupbase',
@@ -79,10 +84,9 @@ class DjangoPackager(PackageConfigBase):
             'jwt',
             'requests_oauthlib',
             'braces',
+            'jira',
+            'imghdr',
         ]
-
-        for m in force_include_module:
-            self.add_module_to_include_files(m)
 
     def prepare(self):
 
@@ -93,12 +97,8 @@ class DjangoPackager(PackageConfigBase):
         from django.conf import settings
         # include_files.extend(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
 
-        old_modules = sys.modules.keys()
-
         for installed_app in settings.INSTALLED_APPS:
-            app_root_name = installed_app
-            if "." in installed_app:
-                app_root_name = installed_app.split(".")[0]
+            app_root_name = self.get_top_module(installed_app)
 
             self.add_module_to_include_files(app_root_name)
 
@@ -106,19 +106,25 @@ class DjangoPackager(PackageConfigBase):
 
         new_modules = sys.modules.keys()
 
-        for i in new_modules:
-            if i not in old_modules:
-                module = i
-                if "." in i:
-                    module = module.split(".")[0]
-                if module not in self.excludes:
-                    self.include_module_names.append(module)
+        for module in new_modules:
+            app_root_name = self.get_top_module(module)
+            if app_root_name not in self.force_include_module:
+                self.force_include_module.append(app_root_name)
+
+        for m in self.force_include_module:
+            self.add_module_to_include_files(m)
 
         # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
         # os.system(sys.executable + " ./manage.py migrate")
         # os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
+
+    def get_top_module(self, installed_app):
+        app_root_name = installed_app
+        if "." in installed_app:
+            app_root_name = installed_app.split(".")[0]
+        return app_root_name
 
     def add_module_to_include_files(self, app_root_name):
         self.excludes.append(app_root_name)
@@ -157,12 +163,12 @@ class DjangoPackager(PackageConfigBase):
     def import_django_sub_module(self, django_app_name, django_sub_module):
         # print django_app_name + "." + django_sub_module
         sub_module_import_name = django_app_name + "." + django_sub_module
-        module = __import__(sub_module_import_name)
+        module = import_sub_module(sub_module_import_name)
         if django_sub_module == "management":
             command_folder = os.path.join(get_folder(module.__file__), "commands")
             if os.path.exists(command_folder):
                 for module_name in enum_modules(command_folder):
-                    __import__(sub_module_import_name + "commands." + module_name)
+                    __import__(sub_module_import_name + ".commands." + module_name)
 
     def get_executable_names(self):
         app_list = [
