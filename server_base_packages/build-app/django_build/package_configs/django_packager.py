@@ -117,7 +117,7 @@ class DjangoPackager(PackageConfigBase):
 
         # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
         # os.system(sys.executable + " ./manage.py migrate")
-        os.system(get_executable_folder(), "scripts/collectstatic.bat")
+        os.system(os.path.join(get_executable_folder(), "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
 
