@@ -7,6 +7,7 @@ import dateutil
 import pkg_resources
 import pytz
 from ufs_tools import get_folder
+from ufs_tools.app_tools import get_executable_folder
 from ufs_tools.short_decorator.ignore_exception import ignore_exc
 
 from django_build.package_configs.base import PackageConfigBase
@@ -116,7 +117,7 @@ class DjangoPackager(PackageConfigBase):
 
         # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
         # os.system(sys.executable + " ./manage.py migrate")
-        os.system(os.path.join(root_folder, "scripts/collectstatic.bat"))
+        os.system(get_executable_folder(), "scripts/collectstatic.bat")
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
 
