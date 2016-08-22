@@ -20,10 +20,14 @@ class UfsBasicStarter(DjangoStarter):
             # {"ipynb": ["jupyter-notebook.exe", "--config=ipython_config.py"]})
         )
 
+    def sync_to_main_thread(self):
+        self.init_ufs_db()
+
     def get_frontend_task_descriptor(self):
-        return self.django_server.get_task_descriptor("runserver", ["0.0.0.0:8110"])
+        # return self.django_server.get_run_server_task_descriptor(["0.0.0.0:8110"])
+        return self.django_server.get_run_server_task_descriptor()
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
     UfsBasicStarter().start_iconized_applications()

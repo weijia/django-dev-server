@@ -68,3 +68,6 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 /.idea
+/others
+/static
+/data/data_post
