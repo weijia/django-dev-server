@@ -1,6 +1,7 @@
 import logging
 import os
 
+from ufs_tools.app_tools import get_executable_folder
 from ufs_tools.python_app_utils.base import AppBase
 from ufs_tools.file_search import find_filename_in_app_folder
 
@@ -15,7 +16,7 @@ __author__ = 'weijia'
 
 log = logging.getLogger(__name__)
 
-os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
+os.environ["POSTGRESQL_ROOT"] = os.path.join(get_executable_folder(), "others/pgsql")
 # os.environ["UFS_DATABASE"] = "sqlite"
 
 
