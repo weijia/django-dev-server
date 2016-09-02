@@ -28,8 +28,12 @@ def combine_tuple(existing_list, new_item_list):
     return refined
 
 
+target = "build_test"
+target = "build"
+
+
 def get_build_exe_params(packager_list):
-    build_exe_dir = "../build/%s" % os.path.basename(get_executable_folder())
+    build_exe_dir = "../%s/%s" % (target, os.path.basename(get_executable_folder()))
 
     ###########################
     # Add python module that is not automatically included in the build below. Such as Django app
