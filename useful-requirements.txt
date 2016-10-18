@@ -170,3 +170,4 @@ xlutils==1.7.1
 xlwt==1.0.0
 zeep==0.14.0
 zope.interface==4.2.0
+djangoautoconf
