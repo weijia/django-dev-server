@@ -28,7 +28,7 @@ class PackageConfigBase(object):
         try:
             app_module = __import__(app_root_name, fromlist="dummy")
             module_file_full_path = app_module.__file__
-            if os.path.basename(module_file_full_path) != "__init__.pyc":
+            if self.is_folder_module(module_file_full_path):
                 include_config = (get_source_filename(module_file_full_path),
                                   get_source_filename(os.path.basename(module_file_full_path)))
             else:
@@ -36,3 +36,7 @@ class PackageConfigBase(object):
         except Exception, e:
             pass
         return include_config
+
+    # noinspection PyMethodMayBeStatic
+    def is_folder_module(self, module_file_full_path):
+        return os.path.basename(module_file_full_path) != "__init__.pyc"

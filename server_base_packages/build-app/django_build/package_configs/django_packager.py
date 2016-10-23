@@ -41,52 +41,52 @@ class DjangoPackager(PackageConfigBase):
             (get_module_path(pkg_resources), "pkg_resources"),
             # Not sure why the following is not included as in includes.
             (get_module_path(dateutil), "dateutil"),
-            (get_module_path(annoying), "annoying"),
+            # (get_module_path(annoying), "annoying"),
             # Required for pytz, otherwise, although build will be done, there will be timezone not found error in
             # runtime Used by pytz to load time zone info in zoneinfo folder
             (get_module_path(pytz), "pytz"),
         ]
         self.excludes = [
-            "pytz",
+            # "pytz",
             "distutils",
             "pkg_resources",
         ]
         self.include_module_names = []
 
         self.force_include_module = [
-            'htmlentitydefs',
-            'HTMLParser',
-            'markupbase',
-            'shortuuid',
-            'persisting_theory',
-            'csv',
-            'appconf',
-            'annoying',
-            'html2text',
-            'requests',
-            'openid',
-            'oauthlib',
-            'markdown',
-            'dateutil',
-            'ufs_tools',
-            'tablib',
-            'diff_match_patch',
-            'daphne',
-            'tendo',
-            'win32file',
-            'git',
-            'smmap',
-            'gitdb',
-            '_multiprocessing',
-            'multiprocessing',
-            'evernote',
-            'thrift',
-            'tastypie',
-            'jwt',
-            'requests_oauthlib',
-            'braces',
-            'jira',
-            'imghdr',
+            # 'htmlentitydefs',
+            # 'HTMLParser',
+            # 'markupbase',
+            # 'shortuuid',
+            # 'persisting_theory',
+            # 'csv',
+            # 'appconf',
+            # 'annoying',
+            # 'html2text',
+            # 'requests',
+            # 'openid',
+            # 'oauthlib',
+            # 'markdown',
+            # 'dateutil',
+            # 'ufs_tools',
+            # 'tablib',
+            # 'diff_match_patch',
+            # 'daphne',
+            # 'tendo',
+            # 'win32file',
+            # 'git',
+            # 'smmap',
+            # 'gitdb',
+            # '_multiprocessing',
+            # 'multiprocessing',
+            # 'evernote',
+            # 'thrift',
+            # 'tastypie',
+            # 'jwt',
+            # 'requests_oauthlib',
+            # 'braces',
+            # 'jira',
+            # 'imghdr',
         ]
 
     def prepare(self):
@@ -128,10 +128,13 @@ class DjangoPackager(PackageConfigBase):
         return app_root_name
 
     def add_module_to_include_files(self, app_root_name):
-        self.excludes.append(app_root_name)
-        include_config = self.get_include_config(app_root_name)
-        if include_config:
-            self.include_files.append(include_config)
+        if not self.is_folder_module(app_root_name):
+            self.include_module_names.append(app_root_name)
+        else:
+            self.excludes.append(app_root_name)
+            include_config = self.get_include_config(app_root_name)
+            if include_config:
+                self.include_files.append(include_config)
 
     def include_default_files_in_django_app(self, django_app_name):
         for django_sub_module in ['urls', 'views', 'admin', 'api', 'models', 'forms', 'decorators', 'mixins',
