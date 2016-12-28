@@ -30,10 +30,10 @@ class DjangoPackager(PackageConfigBase):
 
     def __init__(self):
         super(DjangoPackager, self).__init__()
-        # Create data.db for SQLITE so build process can run with SQLITE
-        os.environ["POSTGRESQL_ROOT"] = ""
+        # # Create data.db for SQLITE so build process can run with SQLITE
+        # os.environ["POSTGRESQL_ROOT"] = ""
         remove_if_exists(self.total_settings_py)
-        self.excludes = []
+        # self.excludes = []
         self.include_files = [
             ("local", "local"),
             ("scripts", "scripts"),
@@ -65,7 +65,7 @@ class DjangoPackager(PackageConfigBase):
             # 'html2text',
             # 'requests',
             # 'openid',
-            # 'oauthlib',
+            'oauthlib',
             # 'markdown',
             # 'dateutil',
             # 'ufs_tools',
@@ -87,6 +87,9 @@ class DjangoPackager(PackageConfigBase):
             # 'braces',
             # 'jira',
             # 'imghdr',
+            "jwt",
+            "requests_oauthlib",
+            "django",
         ]
 
     def prepare(self):
@@ -113,10 +116,9 @@ class DjangoPackager(PackageConfigBase):
                 self.force_include_module.append(app_root_name)
 
         for m in self.force_include_module:
-            self.add_module_to_include_files(m)
+            # self.add_module_to_include_files(m)
+            self.include_module_names.append(app_root_name)
 
-        # os.system(os.path.join(root_folder, "scripts/syncdb.bat"))
-        # os.system(sys.executable + " ./manage.py migrate")
         os.system(os.path.join(get_executable_folder(), "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
         os.system(sys.executable + " ./manage.py dump_settings")
@@ -131,7 +133,8 @@ class DjangoPackager(PackageConfigBase):
         if not self.is_folder_module(app_root_name):
             self.include_module_names.append(app_root_name)
         else:
-            self.excludes.append(app_root_name)
+            if (app_root_name not in self.force_include_module) and (app_root_name not in self.excludes):
+                self.excludes.append(app_root_name)
             include_config = self.get_include_config(app_root_name)
             if include_config:
                 self.include_files.append(include_config)
@@ -196,3 +199,8 @@ class DjangoPackager(PackageConfigBase):
 
     def post_setup(self):
         remove_if_exists(self.total_settings_py)
+
+    def get_excluded_module_names(self):
+        return self.excludes
+
+
