@@ -38,7 +38,8 @@ class DjangoPackager(PackageConfigBase):
             ("local", "local"),
             ("scripts", "scripts"),
             ("server_base_packages/distutils", "distutils"),
-            (get_module_path(pkg_resources), "pkg_resources"),
+            ("server_base_packages/pkg_resources", "pkg_resources"),
+            # (get_module_path(pkg_resources), "pkg_resources"),
             # Not sure why the following is not included as in includes.
             (get_module_path(dateutil), "dateutil"),
             # (get_module_path(annoying), "annoying"),
