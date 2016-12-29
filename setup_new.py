@@ -1,4 +1,6 @@
 from cx_Freeze import setup
+
+from django_build.package_configs.channel_packager import ChannelPackager
 from ufs_tools.python_app_utils.base import AppBase
 import sys
 
@@ -17,7 +19,8 @@ def main():
         BasicPackager(),
         IconizerPackage(),
         DjangoPackager(),
-        TwistedPackager()
+        TwistedPackager(),
+        ChannelPackager(),
     ]
 
     run_packager_prepare(packager_list)
