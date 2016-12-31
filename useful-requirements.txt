@@ -171,3 +171,7 @@ xlwt==1.0.0
 zeep==0.14.0
 zope.interface==4.2.0
 djangoautoconf
+django-crispy-forms
+django-treenav
+django-dbtemplates
+django-bootstrap-pagination
