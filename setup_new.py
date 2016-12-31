@@ -4,6 +4,8 @@ from django_build.package_configs.channel_packager import ChannelPackager
 from ufs_tools.python_app_utils.base import AppBase
 import sys
 
+from django_build.package_configs.redis_packager import RedisPackager
+
 
 def main():
     AppBase().add_default_module_path()
@@ -21,6 +23,7 @@ def main():
         DjangoPackager(),
         TwistedPackager(),
         ChannelPackager(),
+        RedisPackager(),
     ]
 
     run_packager_prepare(packager_list)
