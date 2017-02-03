@@ -35,7 +35,7 @@ django-dynamic-preferences==0.8.1
 django-endless-pagination==2.0
 django-extensions==1.6.1
 django-extra-views==0.8.0
-django-filter==0.13.0
+django-filter==1.0.1
 django-fluent-contents==1.1.4
 django-fluent-utils==1.2.3
 django-geoposition==0.2.2
