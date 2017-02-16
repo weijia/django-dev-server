@@ -175,3 +175,5 @@ Sphinx
 pyzmq
 Pillow
 six
+bleach
+django-el-pagination
