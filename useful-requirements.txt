@@ -176,4 +176,5 @@ pyzmq
 Pillow
 six
 bleach
-django-el-pagination
+django-el-paginationtorrentool
+pyftpdlib
