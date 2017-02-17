@@ -90,7 +90,7 @@ class DjangoPackager(PackageConfigBase):
             # 'imghdr',
             "jwt",
             "requests_oauthlib",
-            "django",
+            # "django",
             'ufs_tools',
         ]
 
@@ -102,6 +102,13 @@ class DjangoPackager(PackageConfigBase):
 
         from django.conf import settings
         # include_files.extend(ModuleDescriptor().get_module_list_from_name("djangoautoconf"))
+
+        # Include django by folder, for the following 2 reasons
+        # 1. we need django template files which is not python modules
+        # 2. Django module will include some module by a flag to check whether it is py3, but in cx_Freeze,
+        # it can not detect such flag?
+        self.add_module_to_include_files("django")
+        self.add_module_to_include_files("cherrypy")
 
         for installed_app in settings.INSTALLED_APPS:
             app_root_name = self.get_top_module(installed_app)
