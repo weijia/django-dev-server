@@ -41,18 +41,24 @@ class DjangoPackager(PackageConfigBase):
             ("server_base_packages/pkg_resources", "pkg_resources"),
             # (get_module_path(pkg_resources), "pkg_resources"),
             # Not sure why the following is not included as in includes.
-            (get_module_path(dateutil), "dateutil"),
+            # (get_module_path(dateutil), "dateutil"),
             # (get_module_path(annoying), "annoying"),
             # Required for pytz, otherwise, although build will be done, there will be timezone not found error in
             # runtime Used by pytz to load time zone info in zoneinfo folder
-            (get_module_path(pytz), "pytz"),
+            # (get_module_path(pytz), "pytz"),
         ]
-        self.excludes = [
-            # "pytz",
-            "distutils",
-            "pkg_resources",
+
+        self.force_include_file = [
+            "pytz",
+            "dateutil",
+            "django_filters",
+            "django",
+            "cherrypy",
+            "redis",
+            "requests_oauthlib",
+            "oauth2",
+            "jinja2",
         ]
-        self.include_module_names = []
 
         self.force_include_module = [
             # 'htmlentitydefs',
@@ -91,6 +97,7 @@ class DjangoPackager(PackageConfigBase):
             "jwt",
             "requests_oauthlib",
             # "django",
+            'ufs_tools.tuple_tools',
         ]
 
     def prepare(self):
@@ -106,26 +113,26 @@ class DjangoPackager(PackageConfigBase):
         # 1. we need django template files which is not python modules
         # 2. Django module will include some module by a flag to check whether it is py3, but in cx_Freeze,
         # it can not detect such flag?
-        self.add_module_to_include_files("django")
-        self.add_module_to_include_files("cherrypy")
+        # self._add_module_to_include_files("django")
+        # self._add_module_to_include_files("cherrypy")
+        # self._add_module_to_include_files("redis")
+        for i in self.force_include_file:
+            self._add_module_to_include_files(i)
 
         for installed_app in settings.INSTALLED_APPS:
             app_root_name = self.get_top_module(installed_app)
+            self._add_module_to_include_files(app_root_name)
 
-            self.add_module_to_include_files(app_root_name)
-
-            self.include_default_files_in_django_app(app_root_name)
+            self._include_default_files_in_django_app(app_root_name)
 
         new_modules = sys.modules.keys()
 
         for module in new_modules:
             app_root_name = self.get_top_module(module)
-            if app_root_name not in self.force_include_module:
-                self.force_include_module.append(app_root_name)
+            self._add_module_to_includes(app_root_name)
 
         for m in self.force_include_module:
-            # self.add_module_to_include_files(m)
-            self.include_module_names.append(app_root_name)
+            self._add_module_to_includes(m)
 
         os.system(os.path.join(get_executable_folder(), "scripts/collectstatic.bat"))
         # os.system(os.path.join(root_folder, "scripts/collectcmd.bat"))
@@ -137,26 +144,16 @@ class DjangoPackager(PackageConfigBase):
             app_root_name = installed_app.split(".")[0]
         return app_root_name
 
-    def add_module_to_include_files(self, app_root_name):
-        if not self.is_folder_module(app_root_name):
-            self.include_module_names.append(app_root_name)
-        else:
-            if (app_root_name not in self.force_include_module) and (app_root_name not in self.excludes):
-                self.excludes.append(app_root_name)
-            include_config = self.get_include_config(app_root_name)
-            if include_config:
-                self.include_files.append(include_config)
-
-    def include_default_files_in_django_app(self, django_app_name):
+    def _include_default_files_in_django_app(self, django_app_name):
         for django_sub_module in ['urls', 'views', 'admin', 'api', 'models', 'forms', 'decorators', 'mixins',
                                   'management', 'migrations']:
-            self.import_django_sub_module(django_app_name, django_sub_module)
+            self._import_django_sub_module(django_app_name, django_sub_module)
 
-        self.import_modules_in_urls(django_app_name)
+        self._import_modules_in_urls(django_app_name)
 
-    def import_modules_in_urls(self, django_sub_module):
+    def _import_modules_in_urls(self, django_sub_module):
         #########
-        # import modules from url
+        # import modules from url.py
         #########
         try:
             module_str = django_sub_module + ".urls"
@@ -175,7 +172,7 @@ class DjangoPackager(PackageConfigBase):
 
     # noinspection PyMethodMayBeStatic
     @ignore_exc
-    def import_django_sub_module(self, django_app_name, django_sub_module):
+    def _import_django_sub_module(self, django_app_name, django_sub_module):
         # print django_app_name + "." + django_sub_module
         sub_module_import_name = django_app_name + "." + django_sub_module
         module = import_sub_module(sub_module_import_name)
@@ -199,16 +196,5 @@ class DjangoPackager(PackageConfigBase):
             app_list.extend(additional_config["additional_apps"])
         return app_list
 
-    def get_include_files_or_folders_with_target(self):
-        return self.include_files
-
-    def get_include_module_names(self):
-        return self.include_module_names
-
     def post_setup(self):
         remove_if_exists(self.total_settings_py)
-
-    def get_excluded_module_names(self):
-        return self.excludes
-
-
