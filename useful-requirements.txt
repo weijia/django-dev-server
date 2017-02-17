@@ -155,6 +155,7 @@ ws4py==0.3.5
 zeep==0.14.0
 zope.interface==4.2.0
 colorama==0.3.7
+Pillow==3.1.1
 channels
 CherryPy
 cx-Freeze
@@ -173,5 +174,6 @@ evernote
 tornado
 Sphinx
 pyzmq
-Pillow
 six
+torrentool
+pyftpdlib

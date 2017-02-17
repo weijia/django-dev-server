@@ -91,6 +91,7 @@ class DjangoPackager(PackageConfigBase):
             "jwt",
             "requests_oauthlib",
             "django",
+            'ufs_tools',
         ]
 
     def prepare(self):
