@@ -58,6 +58,13 @@ class DjangoPackager(PackageConfigBase):
             "requests_oauthlib",
             "oauth2",
             "jinja2",
+            "email",  # Use this to include all modules below email.
+            "nine",
+            'wsgiref',
+            'annoying',
+            'openid',
+            'ufs_tools',
+            'nonefield',
         ]
 
         self.force_include_module = [
@@ -97,7 +104,7 @@ class DjangoPackager(PackageConfigBase):
             "jwt",
             "requests_oauthlib",
             # "django",
-            'ufs_tools.tuple_tools',
+            # 'ufs_tools.tuple_tools',
         ]
 
     def prepare(self):
