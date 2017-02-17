@@ -178,3 +178,4 @@ six
 bleach
 django-el-paginationtorrentool
 pyftpdlib
+social-auth-app-django

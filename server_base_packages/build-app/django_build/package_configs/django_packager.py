@@ -65,6 +65,9 @@ class DjangoPackager(PackageConfigBase):
             'openid',
             'ufs_tools',
             'nonefield',
+            'tastypie',
+            'django_redis',
+            'oauthlib',
         ]
 
         self.force_include_module = [
