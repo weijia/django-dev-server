@@ -108,6 +108,7 @@ class DjangoPackager(PackageConfigBase):
             "requests_oauthlib",
             # "django",
             # 'ufs_tools.tuple_tools',
+            'service_identity',
         ]
 
     def prepare(self):

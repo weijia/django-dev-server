@@ -31,13 +31,13 @@ class UfsStarterConfig(IconizerTaskConfig):
 
     def get_background_tasks(self):
         return (
-            {"redis": find_callable_in_app_framework("redis-server")},
+            {"redis": [find_callable_in_app_framework("redis-server")]},
             # self.django_server.get_task_descriptor("git_pull_all"),
-            self.django_server.get_task_descriptor("start_device_management_daemon"),
+            # self.django_server.get_task_descriptor("start_device_management_daemon"),
             self.django_server.get_task_descriptor("cronserver"),
         )
 
-    def sync_to_main_thread(self):
+    def start_other_tasks_depends_on_frontend_task(self):
         self.django_server.execute_cmd("migrate")
         self.django_server.execute_cmd("create_default_super_user")
 
