@@ -175,3 +175,4 @@ django-crispy-forms
 django-treenav
 django-dbtemplates
 django-bootstrap-pagination
+django-ipware
