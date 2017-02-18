@@ -23,16 +23,18 @@ def main():
         DjangoPackager(),
         TwistedPackager(),
         ChannelPackager(),
-        RedisPackager(),
+        # RedisPackager(),
     ]
 
     run_packager_prepare(packager_list)
 
+    executables = get_executables(packager_list)
+    build_exe_params = get_build_exe_params(packager_list)
     setup(
         version="0.1",  # This is required or build process will have exception.
         description="application starter",
-        options={"build_exe": get_build_exe_params(packager_list)},
-        executables=get_executables(packager_list),
+        options={"build_exe": build_exe_params},
+        executables=executables,
         # include_package_data=True,
         # package_data = {'':['*.*', 'templates/*.*']},
         # packages = find_packages(),

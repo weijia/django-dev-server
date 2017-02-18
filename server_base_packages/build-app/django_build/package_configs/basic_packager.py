@@ -21,13 +21,3 @@ class BasicPackager(PackageConfigBase):
         os.environ["TCL_LIBRARY"] = os.path.join(python_dir, tcl_lib_path_name)
         os.environ["TK_LIBRARY"] = os.path.join(python_dir, tk_lib_path_name)
 
-    def get_excluded_module_names(self):
-        # https://bitbucket.org/anthony_tuininga/cx_freeze/issues/127/collectionssys-error
-        return ['collections.abc',
-                'collections.sys',
-                'cStringIO.errno',
-                'cStringIO.sys',
-                'distutils.archive_util',
-                'mock',  # So include distutils will not report error
-                'certifi',
-                ]
