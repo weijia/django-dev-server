@@ -1,6 +1,10 @@
 from cx_Freeze import setup
+
+from django_build.package_configs.channel_packager import ChannelPackager
 from ufs_tools.python_app_utils.base import AppBase
 import sys
+
+from django_build.package_configs.redis_packager import RedisPackager
 
 
 def main():
@@ -17,16 +21,20 @@ def main():
         BasicPackager(),
         IconizerPackage(),
         DjangoPackager(),
-        TwistedPackager()
+        TwistedPackager(),
+        ChannelPackager(),
+        # RedisPackager(),
     ]
 
     run_packager_prepare(packager_list)
 
+    executables = get_executables(packager_list)
+    build_exe_params = get_build_exe_params(packager_list)
     setup(
         version="0.1",  # This is required or build process will have exception.
         description="application starter",
-        options={"build_exe": get_build_exe_params(packager_list)},
-        executables=get_executables(packager_list),
+        options={"build_exe": build_exe_params},
+        executables=executables,
         # include_package_data=True,
         # package_data = {'':['*.*', 'templates/*.*']},
         # packages = find_packages(),

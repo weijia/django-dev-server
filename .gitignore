@@ -18,7 +18,7 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
+/dist/
 downloads/
 eggs/
 .eggs/
@@ -71,3 +71,8 @@ target/
 /others
 /static
 /data/data_post
+/data
+/media
+/other-apps
+/obs
+/other-apps
