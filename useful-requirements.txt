@@ -110,7 +110,7 @@ pathtools==0.1.2
 pbr==1.10.0
 persisting-theory==0.2.1
 pickleshare==0.6
-pinax-eventlog==1.1.2
+pinax-eventlog
 psycopg2==2.6.1
 Pygments==2.1.3
 PyJWT==1.4.0
@@ -151,15 +151,15 @@ watchdog==0.8.3
 webencodings==0.5
 websocket-client==0.37.0
 ws4py==0.3.5
-zeep==0.14.0
-zope.interface==4.2.0
+# zeep==0.14.0
+# zope.interface==4.2.0
 colorama==0.3.7
 
 # Not version specific
-channels
+# channels
 CherryPy
-cx-Freeze
-daphne
+# cx-Freeze
+# daphne
 ufs-tools
 virtualenv
 xlrd
@@ -173,11 +173,11 @@ django-bootstrap-pagination
 evernote
 tornado
 Sphinx
-pyzmq
+# pyzmq
 Pillow
 six
 bleach
-django-el-paginationtorrentool
+# django-el-paginationtorrentool
 pyftpdlib
 social-auth-app-django
 django-ipware
