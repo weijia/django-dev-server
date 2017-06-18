@@ -196,6 +196,7 @@ class DjangoPackager(PackageConfigBase):
     def get_executable_names(self):
         app_list = [
             'starter',
+            'basic_starter',
             'manage',
             'cherrypy_server',
         ]

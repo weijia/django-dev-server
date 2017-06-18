@@ -5,6 +5,9 @@ from multiprocessing import freeze_support
 from ufs_tools.python_app_utils.base import AppBase
 
 
+os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
+
+
 def main():
     # logging.basicConfig(level=logging.DEBUG)
     AppBase().add_default_module_path()
