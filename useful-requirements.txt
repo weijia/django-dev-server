@@ -190,5 +190,5 @@ django-geoposition
 # Twisted==16.2.0
 
 django-allauth
-django-sekiza
+django-sekizai
 django-pandas
