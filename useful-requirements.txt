@@ -165,7 +165,7 @@ virtualenv
 xlrd
 xlutils
 xlwt
-djangoautoconf
+# djangoautoconf
 django-crispy-forms
 django-treenav
 django-dbtemplates
