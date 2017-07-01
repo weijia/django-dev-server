@@ -192,3 +192,5 @@ django-geoposition
 django-allauth
 django-sekiza
 django-pandas
+paho-mqtt
+simple-crypt
