@@ -194,3 +194,4 @@ django-sekizai
 django-pandas
 paho-mqtt
 simple-crypt
+django-db-logger
