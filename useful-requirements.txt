@@ -195,3 +195,5 @@ django-pandas
 paho-mqtt
 simple-crypt
 babel
+fobi==0.12.2
+django-dash==0.5.2
