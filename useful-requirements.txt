@@ -195,6 +195,5 @@ django-pandas
 paho-mqtt
 simple-crypt
 django-db-logger
-babel
-fobi==0.12.2
+# fobi==0.12.2
 django-dash==0.5.2
