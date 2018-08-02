@@ -202,3 +202,17 @@ simple-crypt
 django-db-logger
 # fobi==0.12.2
 django-dash==0.5.2
+crontab
+django-crontab
+django-el-pagination
+# django-codemirror-widget
+djangocodemirror
+django-taggit
+channels<2
+django-contrib-comments
+django-clever-selects
+django-nyt==0.9.9
+sorl-thumbnail
+wiki
+psycopg2
+django-generic-aggregation
