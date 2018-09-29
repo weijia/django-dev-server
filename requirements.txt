@@ -14,8 +14,12 @@ ipython[notebook]
 #towel_bootstrap
 jinja2
 jsonschema
-#pyparsing==1.5.7
-#pydot
+
+# The following specific version is needed to generate the model graph
+pyparsing==1.5.7
+pydot==1.1.0
+# The above specific version is needed to generate the model graph
+
 django-tastypie
 django-compat
 ufs-tools
