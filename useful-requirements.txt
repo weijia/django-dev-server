@@ -42,7 +42,9 @@ django-mailbox==4.4.7
 django-model-utils==2.5
 django-mptt==0.8.3
 django-mptt-admin==0.3.6
-django-oauth2-provider==0.2.6.1
+# The following do not support Django 1.8, so clone a version supporting Django 1.8 manually
+# Otherwise, rename the migration folder to south_migration
+# django-oauth2-provider==0.2.6.1
 django-pagination==1.0.7
 django-parler==1.6.5
 django-polymorphic==0.9.2
@@ -142,7 +144,7 @@ tablets==0.4.6
 tablib==0.11.2
 testpath==0.3
 tlslite==0.4.9
-towel==0.8.0
+towel==0.10.0
 traitlets==4.2.1
 
 txaio==2.5.1
@@ -184,6 +186,9 @@ django-ipware
 django-jquery
 django-jquery-ui
 django-geoposition
+
+# Used for do math calculation in template
+django-mathfilters
 
 # Build needed?
 # MySQL-python
