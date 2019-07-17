@@ -1,11 +1,11 @@
 django-bootstrap3
 django-admin-bootstrapped
 django-reversion
-django-guardian
+django-guardian==1.4.1
 django-jquery-ui
 django-mptt
 django-oauth2-provider
-django-import-export
+django-import-export==0.4.5
 easy-thumbnails
 django-userena
 
