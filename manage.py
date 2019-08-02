@@ -11,7 +11,7 @@ os.environ["POSTGRESQL_ROOT"] = "others/pgsql"
 def main():
     # logging.basicConfig(level=logging.DEBUG)
     AppBase().add_default_module_path()
-    from djangoautoconf import DjangoAutoConf
+    from djangoautoconf.django_autoconf import DjangoAutoConf
     DjangoAutoConf.set_settings_env()
     # The following is required for freeze app for django
     freeze_support()

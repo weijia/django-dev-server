@@ -1,3 +1,4 @@
+djangoautoconf
 django-bootstrap3
 django-admin-bootstrapped
 django-reversion
