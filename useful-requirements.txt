@@ -216,3 +216,5 @@ sorl-thumbnail
 wiki
 psycopg2
 django-generic-aggregation
+pyxlsb
+django-tables2==1.16.0 # version above this will need django >=1.11

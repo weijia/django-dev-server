@@ -18,9 +18,15 @@ jsonschema
 # The following specific version is needed to generate the model graph
 pyparsing==1.5.7
 pydot==1.1.0
+# Or
+# pydotplus
+# Or use the following
+# https://osdn.net/projects/sfnet_python-xy/downloads/plugins/pygraphviz-1.3-3_py27.exe/ or http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz
 # The above specific version is needed to generate the model graph
 
 django-tastypie
 django-compat
 ufs-tools
 #djangoautoconf
+
+django-db-logger

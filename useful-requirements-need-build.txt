@@ -48,7 +48,8 @@ PyYAML==3.11
 
 # tornado
 # pyzmq
-# django-el-paginationtorrentool
+# django-el-pagination
+torrentool
 
 
 # Build needed?
