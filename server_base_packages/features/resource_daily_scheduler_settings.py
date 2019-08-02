@@ -1,0 +1,1 @@
+INSTALLED_APPS += ("eav", "resource_daily_scheduler", "jquery_ui",)
