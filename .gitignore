@@ -77,3 +77,4 @@ target/
 /obs
 /other-apps
 /notebook
+/*.db
