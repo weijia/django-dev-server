@@ -9,7 +9,7 @@ MYSQL_DATABASE_NAME = "django_apps"
 
 logging.warn("Using mysql database")
 
-if "DATABASES" in locals():
+if "DATABASES" in __builtins__():
     DATABASES = {}
 
 DATABASES.update({
