@@ -27,7 +27,10 @@ Every version number class implements the following interface:
 """
 
 import string, re
-from types import StringType
+try:
+    from types import StringType
+except ImportError:
+    pass
 
 class Version:
     """Abstract base class for version numbering classes.  Just provides
@@ -104,7 +107,7 @@ class StrictVersion (Version):
     def parse (self, vstring):
         match = self.version_re.match(vstring)
         if not match:
-            raise ValueError, "invalid version number '%s'" % vstring
+            raise ValueError("invalid version number '%s'" % vstring)
 
         (major, minor, patch, prerelease, prerelease_num) = \
             match.group(1, 2, 4, 5, 6)
