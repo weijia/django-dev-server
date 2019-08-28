@@ -1,0 +1,5 @@
+djangoautoconf
+django-bootstrap3
+django-jquery-ui
+django-compat
+ufs-tools

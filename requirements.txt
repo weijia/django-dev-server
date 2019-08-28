@@ -1,6 +1,6 @@
 djangoautoconf
 django-bootstrap3
-django-admin-bootstrapped
+django-admin-bootstrapped  # only for Django 1.9
 django-reversion
 django-guardian==1.4.1
 django-jquery-ui
