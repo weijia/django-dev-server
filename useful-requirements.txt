@@ -61,7 +61,7 @@ django-tastypie==0.13.3
 django-tastypie-swagger==0.1.4
 django-template-analyzer==1.6.1
 django-userena==2.0.1
-djangorestframework==3.3.3
+djangorestframework==3.9.1
 docutils==0.12
 drf-tracking==0.2.5
 easy-thumbnails==2.3
