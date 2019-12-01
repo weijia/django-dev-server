@@ -1,0 +1,33 @@
+djangoautoconf
+django-bootstrap3
+django-admin-bootstrapped  # only for Django 1.9
+django-reversion
+django-guardian
+django-jquery-ui
+django-mptt
+django-oauth2-provider
+django-import-export
+easy-thumbnails
+django-userena
+
+# Optional requirements
+ipython[notebook]
+#towel_bootstrap
+jinja2
+jsonschema
+
+# The following specific version is needed to generate the model graph
+pyparsing
+pydot
+# Or
+# pydotplus
+# Or use the following
+# https://osdn.net/projects/sfnet_python-xy/downloads/plugins/pygraphviz-1.3-3_py27.exe/ or http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz
+# The above specific version is needed to generate the model graph
+
+django-tastypie
+django-compat
+ufs-tools
+#djangoautoconf
+
+django-db-logger
