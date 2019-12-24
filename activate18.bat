@@ -1,1 +1,1 @@
-call ..\..\venv\django18\Scripts\activate.bat
+call ..\venv\django18\Scripts\activate.bat

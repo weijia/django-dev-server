@@ -2,11 +2,11 @@ djangoautoconf
 django-bootstrap3
 django-admin-bootstrapped  # only for Django 1.9
 django-reversion
-django-guardian==1.4.1
+django-guardian
 django-jquery-ui
 django-mptt
 django-oauth2-provider
-django-import-export==0.4.5
+django-import-export
 easy-thumbnails
 django-userena
 
@@ -17,8 +17,8 @@ jinja2
 jsonschema
 
 # The following specific version is needed to generate the model graph
-pyparsing==1.5.7
-pydot==1.1.0
+pyparsing
+pydot
 # Or
 # pydotplus
 # Or use the following
