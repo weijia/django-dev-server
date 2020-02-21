@@ -141,7 +141,7 @@ state-machine==0.2.9
 suds==0.4
 suds-requests==0.3
 tablets==0.4.6
-tablib==0.11.2
+tablib==0.11.5
 testpath==0.3
 tlslite==0.4.9
 towel==0.10.0
