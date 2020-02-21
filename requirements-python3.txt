@@ -11,10 +11,10 @@ easy-thumbnails
 django-userena
 
 # Optional requirements
-ipython[notebook]
-#towel_bootstrap
 jinja2
 jsonschema
+#towel_bootstrap
+# ipython[notebook]
 
 # The following specific version is needed to generate the model graph
 pyparsing
