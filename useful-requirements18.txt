@@ -122,7 +122,7 @@ GitPython==1.0.2
 html2text==2014.12.29
 html5lib==0.999999999
 http-parser==0.8.3
-httplib2==0.9.2
+httplib2==0.19.0
 hyperlink==18.0.0
 icalendar==3.10
 idna==2.7
