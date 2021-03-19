@@ -103,7 +103,7 @@ django-tinymce==2.7.0
 django-treenav==1.2.0
 django-userena==2.0.1
 djangocodemirror==2.0.0
-djangorestframework==3.3.3
+djangorestframework==3.11.2
 docutils==0.16
 drf-tracking==0.2.5
 easy-thumbnails==2.5
