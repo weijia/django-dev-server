@@ -135,7 +135,7 @@ ipaddress==1.0.22
 # ipywidgets==7.4.2
 isodate==0.5.4
 jdcal==1.2
-Jinja2==2.10
+Jinja2==2.11.3
 jira==2.0.0
 jsonfield==1.0.3
 # jsonschema==2.6.0
