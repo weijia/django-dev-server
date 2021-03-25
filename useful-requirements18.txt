@@ -203,7 +203,7 @@ pytz==2016.3
 # pywin32-ctypes==0.2.0
 # pywinpty==0.5.4
 pyxlsb==1.0.4
-PyYAML==3.11
+PyYAML==5.4
 # pyzmq==17.1.2
 readme-renderer==24.0
 requests==2.9.1

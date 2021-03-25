@@ -34,7 +34,7 @@
 # python-ldap==2.4.25
 
 # pywin32==220
-PyYAML==3.11
+PyYAML==5.4
 # qtconsole==4.2.1
 
 # zeep==0.14.0
