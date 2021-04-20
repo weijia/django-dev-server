@@ -4,7 +4,7 @@ appdirs==1.4.0
 argh==0.26.2
 # asgiref==1.1.2
 attrs==18.2.0
-autobahn==0.15.0
+autobahn==20.12.3
 Automat==0.7.0
 Babel==2.2.0
 backports-abc==0.4
