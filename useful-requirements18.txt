@@ -175,7 +175,7 @@ pefile==2017.9.3
 persisting-theory==0.2.1
 pickleshare==0.6
 pif==0.8.2
-Pillow==5.2.0
+Pillow==8.3.2
 pinax-eventlog==2.0.3
 pinyin==0.4.0
 pkginfo==1.5.0.1
