@@ -3,7 +3,7 @@ appdirs==1.4.0
 argh==0.26.2
 # asgiref==0.14.0   # Need pyzmq
 autobahn==0.15.0
-Babel==2.2.0
+Babel==2.9.1
 backports-abc==0.4
 backports.ssl-match-hostname==3.5.0.1
 cached-property==1.3.0

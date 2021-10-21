@@ -6,7 +6,7 @@ argh==0.26.2
 attrs==18.2.0
 autobahn==0.15.0
 Automat==0.7.0
-Babel==2.2.0
+Babel==2.9.1
 backports-abc==0.4
 backports.shutil-get-terminal-size==1.0.0
 backports.shutil-which==3.5.1
