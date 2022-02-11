@@ -242,7 +242,7 @@ tqdm==4.42.1
 traitlets==4.2.1
 transliterate==1.10.2
 twine==1.15.0
-Twisted==18.7.0
+Twisted==22.1.0
 txaio==2.5.1
 typing==3.6.6
 tzlocal==1.2.2
