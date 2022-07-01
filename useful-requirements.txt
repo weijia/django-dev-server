@@ -106,7 +106,7 @@ mock==2.0.0
 numpydoc==0.6.0
 oauth2==1.9.0.post1
 oauthlib==1.0.3
-openpyxl==2.3.4
+openpyxl==2.4.2
 path.py==8.1.2
 pathtools==0.1.2
 pbr==1.10.0
