@@ -229,7 +229,7 @@ spark-parser==1.6.1
 Sphinx==1.8.1
 sphinxcontrib-websupport==1.1.0
 state-machine==0.2.9
-suds==0.4
+suds==1.0.0
 suds-requests==0.3
 tablets==0.4.6
 tablib==0.11.2
