@@ -95,7 +95,7 @@ lambdaJSON==4.3
 # lxml==3.4.0
 MarkupSafe==0.23
 mechanize==0.2.5
-mistune==0.7.2
+mistune==2.0.3
 mock==2.0.0
 # mpi4py==2.0.0
 
